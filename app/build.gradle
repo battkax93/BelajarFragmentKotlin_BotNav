@@ -50,7 +50,6 @@ dependencies {
 
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
 
-
     // Network
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
@@ -64,7 +63,6 @@ dependencies {
 
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.2.4'
-
 
     //LoadImage
     implementation 'com.squareup.picasso:picasso:2.71828'
