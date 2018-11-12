@@ -1,6 +1,5 @@
 package sunny.belajarfragmentkotlin.rest
 
-import android.support.v4.BuildConfig
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory

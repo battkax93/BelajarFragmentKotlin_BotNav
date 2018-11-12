@@ -52,7 +52,6 @@ class MainActivity : FragmentActivity() {
         Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show()
     }
 
-
     fun loadFragment() {
         if (supportFragmentManager.findFragmentById(R.id.container2) == null) {
             supportFragmentManager.beginTransaction()
