@@ -17,7 +17,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ProgressBar
-import org.jetbrains.anko.find
 import sunny.belajarfragmentkotlin.R
 import sunny.belajarfragmentkotlin.adapter.StackAdapter
 import sunny.kotlinmoviechart.entity.model.Item
