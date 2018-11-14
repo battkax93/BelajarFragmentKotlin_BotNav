@@ -20,6 +20,9 @@ import android.widget.ProgressBar
 import sunny.belajarfragmentkotlin.R
 import sunny.belajarfragmentkotlin.adapter.StackAdapter
 import sunny.kotlinmoviechart.entity.model.Item
+import android.support.v7.widget.StaggeredGridLayoutManager
+import sunny.belajarfragmentkotlin.feature.SpacesItemDecoration
+
 
 class FirstFragment : ContractFirstFragment.mainView, Fragment() {
 
@@ -60,10 +63,13 @@ class FirstFragment : ContractFirstFragment.mainView, Fragment() {
 
     override fun updateUi(stck: List<Item>) {
         Log.d("flow", "updateUi")
-        val layoutManager12 = LinearLayoutManager(context)
+//        val layoutManager12 = LinearLayoutManager(context)
+        val layoutManager12 = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        val spaceDecoration = SpacesItemDecoration(16)
         adapter = StackAdapter(requireContext(), stck)
         rv.layoutManager = layoutManager12
         rv.adapter = adapter
+        rv.addItemDecoration(spaceDecoration)
         adapter.notifyDataSetChanged()
         if (swp.isRefreshing) swp.isRefreshing = false
 
