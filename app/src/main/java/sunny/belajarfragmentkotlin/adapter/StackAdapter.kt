@@ -17,8 +17,11 @@ import sunny.belajarfragmentkotlin.feature.activity.DetailActivity
 import sunny.belajarfragmentkotlin.feature.fragment.secondfragment.SecondFragment
 import sunny.kotlinmoviechart.entity.model.Item
 import android.support.v4.content.ContextCompat.startActivity
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 import sunny.belajarfragmentkotlin.feature.activity.DetailDialog
 import java.util.*
+import android.view.animation.TranslateAnimation
 
 
 class StackAdapter(val context: Context, var stckList: List<Item>) : RecyclerView.Adapter<StackAdapter.ViewHolder>() {
@@ -31,6 +34,7 @@ class StackAdapter(val context: Context, var stckList: List<Item>) : RecyclerVie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(stckList[position])
+        slideUp(holder.itemView)
         Log.d("flow", itemCount.toString())
     }
 
@@ -88,5 +92,16 @@ class StackAdapter(val context: Context, var stckList: List<Item>) : RecyclerVie
         i.putExtras(bundle)
 
         startActivity(context, i, bundle)
+    }
+
+    fun slideUp(view: View) {
+        val animate = TranslateAnimation(
+                0f, // fromXDelta
+                0f, // toXDelta
+                view.height.toFloat(), // fromYDelta
+                0f)                // toYDelta
+        animate.duration = 1000
+        animate.fillAfter = true
+        view.startAnimation(animate)
     }
 }

@@ -103,12 +103,12 @@ class FirstFragment : ContractFirstFragment.mainView, Fragment() {
         adapter = StackAdapter(requireContext(), stck)
         rv.layoutManager = layoutManager12
         rv.adapter = adapter
-        rv.addItemDecoration(spaceDecoration)
+//        rv.addItemDecoration(spaceDecoration)
         adapter.notifyDataSetChanged()
         if (swp.isRefreshing) swp.isRefreshing = false
     }
 
-    fun changeRV() {
+    private fun changeRV() {
         if (!cekRv) {
             cekRv = true
             Log.d("flow", "changeRV")
