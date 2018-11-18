@@ -16,10 +16,25 @@
 
         <Button
             android:id="@+id/b_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
             android:layout_gravity="center"
             android:text="test" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <fragment
+            android:name="sunny.belajarfragmentkotlin.feature.fragment.firstfragment.FirstFragment"
+            android:id="@+id/log_fragment"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
     </LinearLayout>
 
 </FrameLayout>
