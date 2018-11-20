@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import sunny.belajarfragmentkotlin.R
-import sunny.belajarfragmentkotlin.feature.fragment.GestureListener
+import sunny.belajarfragmentkotlin.feature.GestureListener
 import java.util.*
 import kotlin.concurrent.schedule
 
