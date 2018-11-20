@@ -47,4 +47,6 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
+    <include layout="@layout/content_bottom_sheet" />
+
 </android.support.constraint.ConstraintLayout>

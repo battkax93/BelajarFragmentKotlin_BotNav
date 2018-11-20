@@ -6,8 +6,11 @@ import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.TranslateAnimation
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 
-class GestureListener (var v: View): GestureDetector.SimpleOnGestureListener() {
+class GestureListener(var v: View, var value: Boolean) : GestureDetector.SimpleOnGestureListener() {
 
     val TAG = "GestureListener"
 
@@ -28,7 +31,8 @@ class GestureListener (var v: View): GestureDetector.SimpleOnGestureListener() {
                           distanceY: Float): Boolean {
         // User attempted to scroll
         Log.i(TAG, "Scroll" + getTouchType(e1))
-        v.visibility = View.GONE
+        animateViewDown(v)
+//        v.visibility = View.GONE
         return false
     }
 
@@ -42,6 +46,11 @@ class GestureListener (var v: View): GestureDetector.SimpleOnGestureListener() {
     override fun onShowPress(e: MotionEvent) {
         // User performed a down event, and hasn't moved yet.
         Log.i(TAG, "Show Press" + getTouchType(e))
+        if (!value) {
+            slideDown(v)
+        } else {
+            slideUp(v)
+        }
     }
 
     override fun onDown(e: MotionEvent): Boolean {
@@ -134,6 +143,41 @@ class GestureListener (var v: View): GestureDetector.SimpleOnGestureListener() {
 
             return buttons
         }
+    }
+
+    fun animateViewUp(v: View) {
+        YoYo.with(Techniques.SlideInUp)
+                .duration(1500)
+                .playOn(v)
+    }
+
+    fun animateViewDown(v: View) {
+        YoYo.with(Techniques.SlideInDown)
+                .duration(1500)
+                .pivot(0f, v.height.toFloat())
+                .playOn(v)
+    }
+
+    fun slideUp(view: View) {
+        val animate = TranslateAnimation(
+                0f, // fromXDelta
+                0f, // toXDelta
+                view.height.toFloat(), // fromYDelta
+                0f)                // toYDelta
+        animate.duration = 1000
+        animate.fillAfter = true
+        view.startAnimation(animate)
+    }
+
+    fun slideDown(view: View) {
+        val animate = TranslateAnimation(
+                0f, // fromXDelta
+                0f, // toXDelta
+                0f, // fromYDelta
+                view.height.toFloat()) // toYDelta
+        animate.duration = 1000
+        animate.fillAfter = true
+        view.startAnimation(animate)
     }
 
 }
