@@ -9,6 +9,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_bottom_sheet.*
 import sunny.belajarfragmentkotlin.R
+import sunny.belajarfragmentkotlin.feature.fragment.AddPhotoBottomDialogFragment
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -17,8 +19,7 @@ class DetailActivity : AppCompatActivity() {
     lateinit var userId2: String
     lateinit var urlAvatar2: String
     lateinit var uiDetail: DetailUI
-
-    lateinit var bottomSheet: BottomSheetBehavior<View>
+    lateinit var mBottomSheetBehavior: BottomSheetBehavior<View>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,7 @@ class DetailActivity : AppCompatActivity() {
 
         getExtra()
         init()
+//        loadBottomDialog()
 //        cv.setOnClickListener { slideUp(cv) }
     }
 
@@ -38,6 +40,12 @@ class DetailActivity : AppCompatActivity() {
         urlAvatar2 = intent.extras.getString("urlAvatar")
     }
 
+    /* fun loadBottomDialog(){
+         val addPhotoBottomDialogFragment = AddPhotoBottomDialogFragment.newInstance()
+         addPhotoBottomDialogFragment.show(supportFragmentManager,
+                 "add_photo_dialog_fragment")
+     }*/
+
     fun init() {
 //        with(uiDetail) {
 //            Picasso.get().load(urlAvatar2).into(profilePic)
@@ -47,66 +55,52 @@ class DetailActivity : AppCompatActivity() {
 //            cv.setOnClickListener { slideUp(cv) }
 //        }
 
-        bottomSheet.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
+
+        mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                     bottomSheetHeading.text = "collapse me"
+                    mBottomSheetBehavior.setPeekHeight(100)
                 } else {
                     bottomSheetHeading.text = "expand me"
                 }
 
                 // Check Logs to see how bottom sheets behaves
                 when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> Log.e("Bottom Sheet Behaviour", "STATE_COLLAPSED")
-                    BottomSheetBehavior.STATE_DRAGGING -> Log.e("Bottom Sheet Behaviour", "STATE_DRAGGING")
-                    BottomSheetBehavior.STATE_EXPANDED -> Log.e("Bottom Sheet Behaviour", "STATE_EXPANDED")
-                    BottomSheetBehavior.STATE_HIDDEN -> Log.e("Bottom Sheet Behaviour", "STATE_HIDDEN")
-                    BottomSheetBehavior.STATE_SETTLING -> Log.e("Bottom Sheet Behaviour", "STATE_SETTLING")
+                    BottomSheetBehavior.STATE_COLLAPSED -> Log.d("Bottom Sheet Behaviour", "STATE_COLLAPSED")
+                    BottomSheetBehavior.STATE_DRAGGING -> Log.d("Bottom Sheet Behaviour", "STATE_DRAGGING")
+                    BottomSheetBehavior.STATE_EXPANDED -> Log.d("Bottom Sheet Behaviour", "STATE_EXPANDED")
+                    BottomSheetBehavior.STATE_HIDDEN -> Log.d("Bottom Sheet Behaviour", "STATE_HIDDEN")
+                    BottomSheetBehavior.STATE_SETTLING -> Log.d("Bottom Sheet Behaviour", "STATE_SETTLING")
                 }
             }
 
-
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
+                Log.d("Bottom Sheet Behaviour", "onSlide")
             }
         })
 
-            Picasso.get().load(urlAvatar2).into(iv_ava)
-            display_name.text = displayName2
-            user_type.text = userType2
-            user_id.text = userId2
-        }
+        Picasso.get().load(urlAvatar2).into(iv_ava)
+        display_name.text = displayName2
+        user_type.text = userType2
+        user_id.text = userId2
 
+        Picasso.get().load(urlAvatar2).into(iv_ava3)
+        display_name3.text = displayName2
+        user_type3.text = userType2
+        user_id3.text = userId2
 
-//                fun slideUp (view: View) {
-//            val animate = TranslateAnimation(
-//                    0f, // fromXDelta
-//                    0f, // toXDelta
-//                    (view.height * 2).toFloat(), // fromYDelta
-//                    0f)                // toYDelta
-//            animate.duration = 1000
-//            animate.fillAfter = true
-//            view.startAnimation(animate)
-//        }
+       /* mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    mBottomSheetBehavior.setPeekHeight(300)
+                }
+            }
 
-//        fun slideDown(view: View) {
-//            val animate = TranslateAnimation(
-//                    0f, // fromXDelta
-//                    0f, // toXDelta
-//                    0f, // fromYDelta
-//                    (view.height * 2).toFloat()) // toYDelta
-//            animate.duration = 1000
-//            animate.fillAfter = true
-//            view.startAnimation(animate)
-//        }
-
-//        fun animateButton(v: View) {
-//            YoYo.with(Techniques.RubberBand)
-//                    .duration(2000)
-//                    .playOn(v)
-//        }
-
-
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+        })*/
     }
+}
 
