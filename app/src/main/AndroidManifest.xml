@@ -20,10 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.activity.DetailActivity" />
         <activity
-            android:name=".feature.activity.Main2Activity"
-            android:label="@string/title_activity_main2"
+            android:name=".feature.activity.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

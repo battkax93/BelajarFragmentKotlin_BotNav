@@ -55,8 +55,7 @@ class DetailActivity : AppCompatActivity() {
 //            cv.setOnClickListener { slideUp(cv) }
 //        }
 
-        mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
-
+       /* mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
         mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
@@ -80,7 +79,7 @@ class DetailActivity : AppCompatActivity() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 Log.d("Bottom Sheet Behaviour", "onSlide")
             }
-        })
+        })*/
 
         Picasso.get().load(urlAvatar2).into(iv_ava)
         display_name.text = displayName2
