@@ -1,7 +1,9 @@
 package sunny.belajarfragmentkotlin.feature.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -55,31 +57,31 @@ class DetailActivity : AppCompatActivity() {
 //            cv.setOnClickListener { slideUp(cv) }
 //        }
 
-       /* mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
-        mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
+        /* mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
+         mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetHeading.text = "collapse me"
-                    mBottomSheetBehavior.setPeekHeight(100)
-                } else {
-                    bottomSheetHeading.text = "expand me"
-                }
+                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                     bottomSheetHeading.text = "collapse me"
+                     mBottomSheetBehavior.setPeekHeight(100)
+                 } else {
+                     bottomSheetHeading.text = "expand me"
+                 }
 
-                // Check Logs to see how bottom sheets behaves
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> Log.d("Bottom Sheet Behaviour", "STATE_COLLAPSED")
-                    BottomSheetBehavior.STATE_DRAGGING -> Log.d("Bottom Sheet Behaviour", "STATE_DRAGGING")
-                    BottomSheetBehavior.STATE_EXPANDED -> Log.d("Bottom Sheet Behaviour", "STATE_EXPANDED")
-                    BottomSheetBehavior.STATE_HIDDEN -> Log.d("Bottom Sheet Behaviour", "STATE_HIDDEN")
-                    BottomSheetBehavior.STATE_SETTLING -> Log.d("Bottom Sheet Behaviour", "STATE_SETTLING")
-                }
-            }
+                 // Check Logs to see how bottom sheets behaves
+                 when (newState) {
+                     BottomSheetBehavior.STATE_COLLAPSED -> Log.d("Bottom Sheet Behaviour", "STATE_COLLAPSED")
+                     BottomSheetBehavior.STATE_DRAGGING -> Log.d("Bottom Sheet Behaviour", "STATE_DRAGGING")
+                     BottomSheetBehavior.STATE_EXPANDED -> Log.d("Bottom Sheet Behaviour", "STATE_EXPANDED")
+                     BottomSheetBehavior.STATE_HIDDEN -> Log.d("Bottom Sheet Behaviour", "STATE_HIDDEN")
+                     BottomSheetBehavior.STATE_SETTLING -> Log.d("Bottom Sheet Behaviour", "STATE_SETTLING")
+                 }
+             }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                Log.d("Bottom Sheet Behaviour", "onSlide")
-            }
-        })*/
+             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                 Log.d("Bottom Sheet Behaviour", "onSlide")
+             }
+         })*/
 
         Picasso.get().load(urlAvatar2).into(iv_ava)
         display_name.text = displayName2
@@ -91,15 +93,34 @@ class DetailActivity : AppCompatActivity() {
         user_type3.text = userType2
         user_id3.text = userId2
 
-       /* mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    mBottomSheetBehavior.setPeekHeight(300)
-                }
-            }
+        b_next.setOnClickListener { sendData(displayName2, urlAvatar2, userType2, userId2) }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-        })*/
+        /* mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+             override fun onStateChanged(bottomSheet: View, newState: Int) {
+                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                     mBottomSheetBehavior.setPeekHeight(300)
+                 }
+             }
+
+             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+         })*/
     }
+
+    fun sendData(name: String, urlAvatar: String?, userType: String, userId: String) {
+        Log.d("Flow", "adapter.SendData")
+
+        val bundle = Bundle()
+        val i = Intent(this, Detail2Activity::class.java)
+
+        bundle.putString("displayName", name)
+        bundle.putString("userType", userType)
+        bundle.putString("userId", userId)
+        bundle.putString("urlAvatar", urlAvatar)
+
+        i.putExtras(bundle)
+
+        ContextCompat.startActivity(this, i, bundle)
+    }
+
 }
 
