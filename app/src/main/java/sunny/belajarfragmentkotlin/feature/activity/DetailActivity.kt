@@ -29,8 +29,6 @@ import sunny.belajarfragmentkotlin.R.id.scroll
 import android.support.v4.widget.NestedScrollView
 
 
-
-
 class DetailActivity : AppCompatActivity() {
 
     lateinit var displayName2: String
@@ -76,6 +74,7 @@ class DetailActivity : AppCompatActivity() {
 
         Picasso.get().load(urlAvatar2).into(iv_ava)
 
+        tv_title.text = displayName2
         display_name3.text = displayName2
         user_type3.text = userType2
         user_id3.text = userId2
@@ -84,18 +83,17 @@ class DetailActivity : AppCompatActivity() {
     }
 
     fun appBarListener() {
-
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         app_bar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             if (Math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
                 //  Collapse
+                Log.d("flow", "collapse")
                 toolbar.visibility = View.VISIBLE
-                setSupportActionBar(toolbar)
-                supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-
             } else {
                 //Expanded
-                toolbar.visibility = View.GONE
+                Log.d("flow", "expanded")
+                toolbar.visibility = View.INVISIBLE
 
             }
         })
