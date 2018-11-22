@@ -1,5 +1,7 @@
 package sunny.belajarfragmentkotlin.feature.activity
 
+import android.R.attr.action
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
@@ -12,6 +14,21 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_bottom_sheet.*
 import sunny.belajarfragmentkotlin.R
 import sunny.belajarfragmentkotlin.feature.fragment.AddPhotoBottomDialogFragment
+import android.support.design.widget.AppBarLayout
+import android.R.attr.data
+import android.app.PendingIntent.getActivity
+import android.support.v4.view.ViewCompat
+import android.support.v7.app.ActionBar
+import android.util.TypedValue
+import android.view.ActionMode
+import org.jetbrains.anko.dimenAttr
+import android.opengl.ETC1.getHeight
+import android.view.ViewTreeObserver
+import android.widget.Toast
+import sunny.belajarfragmentkotlin.R.id.scroll
+import android.support.v4.widget.NestedScrollView
+
+
 
 
 class DetailActivity : AppCompatActivity() {
@@ -21,7 +38,6 @@ class DetailActivity : AppCompatActivity() {
     lateinit var userId2: String
     lateinit var urlAvatar2: String
     lateinit var uiDetail: DetailUI
-    lateinit var mBottomSheetBehavior: BottomSheetBehavior<View>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +47,7 @@ class DetailActivity : AppCompatActivity() {
 
         getExtra()
         init()
+        appBarListener()
 //        loadBottomDialog()
 //        cv.setOnClickListener { slideUp(cv) }
     }
@@ -57,53 +74,32 @@ class DetailActivity : AppCompatActivity() {
 //            cv.setOnClickListener { slideUp(cv) }
 //        }
 
-        /* mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
-         mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-             override fun onStateChanged(bottomSheet: View, newState: Int) {
-
-                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                     bottomSheetHeading.text = "collapse me"
-                     mBottomSheetBehavior.setPeekHeight(100)
-                 } else {
-                     bottomSheetHeading.text = "expand me"
-                 }
-
-                 // Check Logs to see how bottom sheets behaves
-                 when (newState) {
-                     BottomSheetBehavior.STATE_COLLAPSED -> Log.d("Bottom Sheet Behaviour", "STATE_COLLAPSED")
-                     BottomSheetBehavior.STATE_DRAGGING -> Log.d("Bottom Sheet Behaviour", "STATE_DRAGGING")
-                     BottomSheetBehavior.STATE_EXPANDED -> Log.d("Bottom Sheet Behaviour", "STATE_EXPANDED")
-                     BottomSheetBehavior.STATE_HIDDEN -> Log.d("Bottom Sheet Behaviour", "STATE_HIDDEN")
-                     BottomSheetBehavior.STATE_SETTLING -> Log.d("Bottom Sheet Behaviour", "STATE_SETTLING")
-                 }
-             }
-
-             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                 Log.d("Bottom Sheet Behaviour", "onSlide")
-             }
-         })*/
-
         Picasso.get().load(urlAvatar2).into(iv_ava)
-        display_name.text = displayName2
-        user_type.text = userType2
-        user_id.text = userId2
 
-        Picasso.get().load(urlAvatar2).into(iv_ava3)
         display_name3.text = displayName2
         user_type3.text = userType2
         user_id3.text = userId2
 
         b_next.setOnClickListener { sendData(displayName2, urlAvatar2, userType2, userId2) }
+    }
 
-        /* mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                     mBottomSheetBehavior.setPeekHeight(300)
-                 }
-             }
+    fun appBarListener() {
 
-             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-         })*/
+        app_bar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            if (Math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
+                //  Collapse
+                toolbar.visibility = View.VISIBLE
+                setSupportActionBar(toolbar)
+                supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
+            } else {
+                //Expanded
+                toolbar.visibility = View.GONE
+
+            }
+        })
+
     }
 
     fun sendData(name: String, urlAvatar: String?, userType: String, userId: String) {

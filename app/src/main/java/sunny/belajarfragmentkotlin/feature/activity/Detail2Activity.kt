@@ -9,6 +9,16 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_bottom_sheet.*
 import sunny.belajarfragmentkotlin.R
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.Bitmap
+import android.graphics.BlurMaskFilter
+import android.widget.ImageView
+import com.squareup.picasso.Callback
+import kotlinx.android.synthetic.main.activity_detail2.*
+import org.jetbrains.anko.imageBitmap
+import java.lang.Exception
+
 
 class Detail2Activity : AppCompatActivity() {
 
@@ -42,15 +52,16 @@ class Detail2Activity : AppCompatActivity() {
 //            cv.setOnClickListener { slideUp(cv) }
 //        }
 
-        mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet2)
+        mBottomSheetBehavior.peekHeight = 100
         mBottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
                 if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetHeading.text = "collapse me"
+//                    bottomSheetHeading.text = "collapse me"
                     mBottomSheetBehavior.setPeekHeight(100)
                 } else {
-                    bottomSheetHeading.text = "expand me"
+//                    bottomSheetHeading.text = "expand me"
                 }
 
                 // Check Logs to see how bottom sheets behaves
@@ -68,12 +79,13 @@ class Detail2Activity : AppCompatActivity() {
             }
         })
 
-        Picasso.get().load(urlAvatar2).into(iv_ava)
-        display_name.text = displayName2
-        user_type.text = userType2
-        user_id.text = userId2
+        loadPicOnNewTarget(urlAvatar2)
 
-        Picasso.get().load(urlAvatar2).into(iv_ava3)
+        Picasso.get().load(urlAvatar2).into(iv_ava2)
+        display_name2.text = displayName2
+        user_type2.text = userType2
+        user_id2.text = userId2
+
         display_name3.text = displayName2
         user_type3.text = userType2
         user_id3.text = userId2
@@ -88,5 +100,20 @@ class Detail2Activity : AppCompatActivity() {
              override fun onSlide(bottomSheet: View, slideOffset: Float) {}
          })
     }*/
+    }
+
+    fun loadPicOnNewTarget(url: String) {
+        val img = ImageView(this)
+        Picasso.get()
+                .load(url)
+                .into(img, object : Callback {
+                    override fun onSuccess() {
+                        layoutTop.background = img.drawable
+                    }
+
+                    override fun onError(e: Exception?) {
+                        Log.e("error", "error on loading image")
+                    }
+                })
     }
 }
