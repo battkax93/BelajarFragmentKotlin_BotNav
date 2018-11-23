@@ -37,14 +37,14 @@ class SecondFragment : Fragment(), ContractSecondFragment.mainView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        present.getNews(requireContext(), "id", "business")
+        present.getNews(api, requireContext(), "id", "business")
     }
 
     override fun init(v: View) {
 
         pbar = v.findViewById(R.id.mainProgressBar)
 
-//        api = NewsApi()
+        api = NewsApi()
         present = PresentSecondFragment(this)
     }
 
@@ -53,9 +53,8 @@ class SecondFragment : Fragment(), ContractSecondFragment.mainView {
 
     override fun updateUi(news: answer) {
         if (news.status == "ok") {
-            Toast.makeText(requireContext(), "ok", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), news.articles[2].title, Toast.LENGTH_SHORT).show()
         }
-
     }
 
     override fun showLoading() {

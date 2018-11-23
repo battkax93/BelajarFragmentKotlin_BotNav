@@ -16,7 +16,7 @@ interface ContractSecondFragment {
     }
 
     interface presenter {
-        fun getNews( ctx: Context, country: String, category: String)
+        fun getNews(api: NewsApi, ctx: Context, country: String, category: String)
     }
 
 }
