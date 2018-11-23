@@ -17,6 +17,7 @@ import sunny.belajarfragmentkotlin.feature.fragment.AddPhotoBottomDialogFragment
 import android.support.design.widget.AppBarLayout
 import android.R.attr.data
 import android.app.PendingIntent.getActivity
+import android.graphics.Color
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.ActionBar
 import android.util.TypedValue
@@ -46,8 +47,6 @@ class DetailActivity : AppCompatActivity() {
         getExtra()
         init()
         appBarListener()
-//        loadBottomDialog()
-//        cv.setOnClickListener { slideUp(cv) }
     }
 
     fun getExtra() {
@@ -57,11 +56,6 @@ class DetailActivity : AppCompatActivity() {
         urlAvatar2 = intent.extras.getString("urlAvatar")
     }
 
-    /* fun loadBottomDialog(){
-         val addPhotoBottomDialogFragment = AddPhotoBottomDialogFragment.newInstance()
-         addPhotoBottomDialogFragment.show(supportFragmentManager,
-                 "add_photo_dialog_fragment")
-     }*/
 
     fun init() {
 //        with(uiDetail) {
@@ -74,7 +68,7 @@ class DetailActivity : AppCompatActivity() {
 
         Picasso.get().load(urlAvatar2).into(iv_ava)
 
-        tv_title.text = displayName2
+//        tv_title.text = displayName2
         display_name3.text = displayName2
         user_type3.text = userType2
         user_id3.text = userId2
@@ -85,6 +79,11 @@ class DetailActivity : AppCompatActivity() {
     fun appBarListener() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        toolbar_layout.title = displayName2
+        toolbar_layout.setBackgroundColor(Color.TRANSPARENT)
+        toolbar_layout.cameraDistance = 5.toFloat()
+
         app_bar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             if (Math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
                 //  Collapse
@@ -94,10 +93,8 @@ class DetailActivity : AppCompatActivity() {
                 //Expanded
                 Log.d("flow", "expanded")
                 toolbar.visibility = View.INVISIBLE
-
             }
         })
-
     }
 
     fun sendData(name: String, urlAvatar: String?, userType: String, userId: String) {

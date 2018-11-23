@@ -1,4 +1,4 @@
-package sunny.belajarfragmentkotlin.entity.model
+package sunny.belajarfragmentkotlin.entity.model.Github
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

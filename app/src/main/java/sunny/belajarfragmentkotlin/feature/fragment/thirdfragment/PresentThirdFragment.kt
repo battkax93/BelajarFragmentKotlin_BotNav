@@ -3,6 +3,7 @@ package sunny.belajarfragmentkotlin.feature.fragment.thirdfragment
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import retrofit2.Retrofit
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import sunny.kotlinmoviechart.network.api.GithubApi

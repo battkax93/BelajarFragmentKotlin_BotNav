@@ -13,8 +13,9 @@ import com.squareup.picasso.Picasso
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 import org.jetbrains.anko.support.v4.UI
+import sunny.belajarfragmentkotlin.Constant
 import sunny.belajarfragmentkotlin.R
-import sunny.belajarfragmentkotlin.entity.model.Github
+import sunny.belajarfragmentkotlin.entity.model.Github.Github
 import sunny.belajarfragmentkotlin.feature.GestureListener
 import sunny.kotlinmoviechart.network.api.GithubApi
 
@@ -82,10 +83,10 @@ class ThirdFragment : Fragment(), ContractThirdFragment.mainView {
 
         v.setOnTouchListener { view, motionEvent ->
             var gestureListener: GestureListener
-            if(!value) {
+            if (!value) {
                 gestureListener = GestureListener(v, value)
             } else {
-                gestureListener = GestureListener(v,!value)
+                gestureListener = GestureListener(v, !value)
             }
             var gd = GestureDetector(activity, gestureListener)
             gd.onTouchEvent(motionEvent)

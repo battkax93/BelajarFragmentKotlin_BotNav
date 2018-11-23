@@ -1,7 +1,7 @@
 package sunny.belajarfragmentkotlin.feature.fragment.thirdfragment
 
 import android.content.Context
-import sunny.belajarfragmentkotlin.entity.model.Github
+import sunny.belajarfragmentkotlin.entity.model.Github.Github
 import sunny.kotlinmoviechart.network.api.GithubApi
 
 interface ContractThirdFragment {

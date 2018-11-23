@@ -3,7 +3,7 @@ package sunny.kotlinmoviechart.network.api
 import retrofit2.http.GET
 import retrofit2.http.Path
 import rx.Observable
-import sunny.belajarfragmentkotlin.entity.model.Github
+import sunny.belajarfragmentkotlin.entity.model.Github.Github
 
 interface Services {
     @GET("users/{username}")
