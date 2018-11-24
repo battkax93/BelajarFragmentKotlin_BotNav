@@ -24,8 +24,10 @@
             android:name=".feature.activity.DetailActivity"
             android:parentActivityName=".feature.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".feature.activity.Detail2Activity"></activity>
+        <activity android:name=".feature.activity.Detail2Activity" />
+        <activity
+            android:name=".feature.activity.NewsDetailActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

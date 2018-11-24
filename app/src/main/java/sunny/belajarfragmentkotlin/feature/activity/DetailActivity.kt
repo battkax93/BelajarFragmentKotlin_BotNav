@@ -1,10 +1,9 @@
 package sunny.belajarfragmentkotlin.feature.activity
 
-import android.R.attr.action
-import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -13,21 +12,6 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_bottom_sheet.*
 import sunny.belajarfragmentkotlin.R
-import sunny.belajarfragmentkotlin.feature.fragment.AddPhotoBottomDialogFragment
-import android.support.design.widget.AppBarLayout
-import android.R.attr.data
-import android.app.PendingIntent.getActivity
-import android.graphics.Color
-import android.support.v4.view.ViewCompat
-import android.support.v7.app.ActionBar
-import android.util.TypedValue
-import android.view.ActionMode
-import org.jetbrains.anko.dimenAttr
-import android.opengl.ETC1.getHeight
-import android.view.ViewTreeObserver
-import android.widget.Toast
-import sunny.belajarfragmentkotlin.R.id.scroll
-import android.support.v4.widget.NestedScrollView
 
 
 class DetailActivity : AppCompatActivity() {
@@ -82,7 +66,6 @@ class DetailActivity : AppCompatActivity() {
 
         toolbar_layout.title = displayName2
         toolbar_layout.setBackgroundColor(Color.TRANSPARENT)
-        toolbar_layout.cameraDistance = 5.toFloat()
 
         app_bar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             if (Math.abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {

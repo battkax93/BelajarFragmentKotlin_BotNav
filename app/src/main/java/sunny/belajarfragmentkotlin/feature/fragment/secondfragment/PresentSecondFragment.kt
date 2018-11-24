@@ -12,7 +12,7 @@ class PresentSecondFragment(val mView: ContractSecondFragment.mainView) : Contra
 
     private val apiKeys = Constant.NEWS_KEY
 
-    override fun getNews(api:NewsApi, ctx: Context, country: String, category: String) {
+    override fun getNews(api: NewsApi, ctx: Context, country: String, category: String) {
         Log.d("FLOW", "$apiKeys ,$country ,$category")
         Log.d("FLOW", "getNews")
         mView.showLoading()
@@ -21,8 +21,8 @@ class PresentSecondFragment(val mView: ContractSecondFragment.mainView) : Contra
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     mView.hideLoading()
-                    Log.d("FLOW", "" + it.articles[2].title)
-                    mView.updateUi(it)
+                    Log.d("FLOW", "" + it.status)
+                    mView.updateUi(it.articles)
                 }, {
                     mView.hideLoading()
                     Log.e("error", "" + it.toString())

@@ -10,7 +10,7 @@ interface ContractSecondFragment {
     interface mainView {
         fun init(v: View)
         fun action()
-        fun updateUi(news: answer)
+        fun updateUi(news: List<answer.Article>)
         fun showLoading()
         fun hideLoading()
     }

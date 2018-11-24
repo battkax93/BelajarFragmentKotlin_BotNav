@@ -2,18 +2,19 @@ package sunny.belajarfragmentkotlin.feature.fragment.secondfragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.Toast
 import sunny.belajarfragmentkotlin.R
+import sunny.belajarfragmentkotlin.adapter.NewsAdapter
 import sunny.belajarfragmentkotlin.entity.model.newsapi.answer
+import sunny.belajarfragmentkotlin.feature.SpacesItemDecoration
 import sunny.belajarfragmentkotlin.rest.News.NewsApi
-import java.util.*
-import kotlin.concurrent.schedule
 
 class SecondFragment : Fragment(), ContractSecondFragment.mainView {
 
@@ -23,6 +24,12 @@ class SecondFragment : Fragment(), ContractSecondFragment.mainView {
 
     lateinit var api: NewsApi
     lateinit var present: ContractSecondFragment.presenter
+
+    lateinit var adapter: NewsAdapter
+
+    lateinit var swp: SwipeRefreshLayout
+    lateinit var rv: RecyclerView
+    lateinit var newsss: List<answer.Article>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,18 +50,32 @@ class SecondFragment : Fragment(), ContractSecondFragment.mainView {
     override fun init(v: View) {
 
         pbar = v.findViewById(R.id.mainProgressBar)
-
+        rv = v.findViewById(R.id.rv_news)
+        swp = v.findViewById(R.id.swp_refresh2)
         api = NewsApi()
         present = PresentSecondFragment(this)
+
+        swp.setOnRefreshListener { action() }
     }
 
     override fun action() {
+        Log.d("FLOW", "secondFrag.action")
+        present.getNews(api, requireContext(), "id", "business")
     }
 
-    override fun updateUi(news: answer) {
-        if (news.status == "ok") {
-            Toast.makeText(requireContext(), news.articles[2].title, Toast.LENGTH_SHORT).show()
-        }
+    override fun updateUi(news: List<answer.Article>) {
+
+        newsss = news
+        Log.d("flow", "updateUi")
+        val layoutManager12 = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        val spaceDecoration = SpacesItemDecoration(5)
+        adapter = NewsAdapter(requireContext(), newsss)
+        rv.layoutManager = layoutManager12
+        rv.adapter = adapter
+//        rv.addItemDecoration(spaceDecoration)
+        adapter.notifyDataSetChanged()
+        if (swp.isRefreshing) swp.isRefreshing = false
+
     }
 
     override fun showLoading() {
